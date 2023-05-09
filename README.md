@@ -2,72 +2,68 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Nest FFmpeg Starter with Docker
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This starter project is a simple Nest application that demonstrates the integration of FFmpeg with Docker. The project provides an easy-to-use example for working with video and audio processing using NestJS and FFmpeg in a Dockerized environment.
 
-## Description
+## Getting Started
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+These instructions will help you set up and run the project on your local machine for development and testing purposes.
 
-## Installation
+### Prerequisites
+
+To run this project, you need to have the following software installed on your system:
+
+- [Docker](https://www.docker.com/products/docker-desktop)
+
+### Installation
+
+1. Clone the repository:
 
 ```bash
-$ npm install
+git clone https://github.com/owenthcarey/nest-ffmpeg.git
+cd nest-ffmpeg
 ```
 
-## Running the app
+2. Build and run the Docker container:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+./build_and_run.sh
 ```
 
-## Test
+This script will stop and remove any existing Docker container using port 3000, build the Docker image, and run a new container using the created image.
+
+## Usage
+
+Once the Docker container is running, you can test the FFmpeg integration by sending a request to the `/ffmpeg` endpoint:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+curl http://localhost:3000/api/ffmpeg
 ```
 
-## Support
+The response should return the version information of FFmpeg installed in the Docker container.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Project Structure
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+```text
+.
+├── build_and_run.sh          # Script to build and run the Docker container
+├── Dockerfile                # Dockerfile to create the Docker image
+├── nest-cli.json             # NestJS CLI configuration
+├── package.json              # Application dependencies and scripts
+├── package-lock.json         # Exact dependency tree for consistency across environments
+├── src                       # Source code directory
+│   ├── app.controller.ts     # Main application controller
+│   ├── app.module.ts         # Main application module
+│   ├── app.service.ts        # Main application service
+│   ├── ffmpeg                # FFmpeg integration code
+│   │   ├── ffmpeg.controller.ts
+│   │   ├── ffmpeg.module.ts
+│   │   └── ffmpeg.service.ts
+│   └── main.ts               # Application entry point
+├── test                      # End-to-end test configuration and specs
+│   ├── app.e2e-spec.ts
+│   └── jest-e2e.json
+├── tsconfig.build.json       # TypeScript configuration for building the application
+└── tsconfig.json             # TypeScript configuration for development
+```
